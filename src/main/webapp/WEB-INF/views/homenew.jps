@@ -1,0 +1,94 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="nf" uri="/WEB-INF/tld/NumberFormat.tld"%>
+<%@ taglib prefix="nf" uri="/WEB-INF/tld/NumberFormat.tld"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tt"%>
+
+<tt:html>
+<tt:head title="Home">
+
+
+	<link href="../../static/styles/css/style.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Kotta+One|Cantarell:400,700" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</tt:head>
+<tt:body cssClass="body" pageName="home">
+<div class="wrap">	 
+	      <div class="header">
+	      	  <div class="header_top">					
+					  <div class="profile_details">
+				                            <div class="user-info">
+							        			
+							        						<c:if test="${user != null && !user.anonymous}">
+							        							<h4>Hello,<a href="/game/${game.id}/recap/${user.id}">${game.user.id} </a></h4>
+							        							<ul>
+								        							<li class="profile active"><a href="#">Profile </a></li>
+								        							<li> | </li>
+																	<li class="logout"><a href="/uitloggen">log out &raquo;</a></li>
+																<span></span>
+															</c:if>
+															<c:if test="${user == null || user.anonymous}">	
+						        								<h4>Hello, Anonymous player </h4>
+							        							<ul>	
+																<li class="logout"><a href="/inloggen">log in &raquo;</a></li>
+																<li> | </li>
+																<li class="logout"><a href="/registreren">register &raquo;</a></li>
+																<span></span>
+															</c:if>
+							        				<div class="clear"></div>		
+							        			</ul>
+							        		</div>			                            
+				               <div class="profile_img">	
+				             	   <a href=""><img src="${u.user.smallAvatarUrl}" alt="" />	</a>
+				                </div>		
+				             <div class="clear"></div>		  	
+					    </div>	
+		 		      <div class="clear"></div>				 
+				   </div>
+			</div>	  					     
+	</div>
+  	<div class="main">  
+	    <div class="wrap">  		 
+		<!-- Menu !-->
+		<div class="chart_list">
+		  <ul>
+		  	<li><a href="#" class="red">Play Game</a></li>
+		  	<li><a href="#" class="purple">Leadbord</p></a></li>
+		  	<li><a href="#" class="yellow">Login</a></li>
+		  	<li><a href="#" class="blue">About us</a></li>
+		  	<div class="clear"></div>	
+		  </ul>
+		</div>	
+		
+		<!-- Play Game !-->
+
+		<div class="graph">	
+			<div class="chart"><h3>Play Game</h3>
+				<ul >
+					<center>
+					<c:forEach var="channel" items="${channels}">
+					
+					<li>
+						<a style="border:none;  width:80%;" href="/start-game/${channel.video.id}" title="${channel.video.title}" rel="nofollow" class="box channel col" >
+							<div class="img">
+								<img src="${channel.video.imageUrl}" />
+								<div class="overlay trigger"></div>
+							</div>
+							<h3><p>${channel.video.title}</h3>
+							<h4>games: ${channel.video.timesPlayed}<br/>high score: <nf:format number="${channel.highscore}" /></h4>
+						</a>
+					</li>
+					</c:forEach>			
+				</ul>
+				</div>
+			</div>
+
+		<div class="copy-right">
+				<p>&COPY; 2015 Designed by <a href="http://crowddriven.nl" target="_blank">CrowDDriven</a> </p>
+	 	 </div>  
+</tt:body>
+</tt:html>
